@@ -36,5 +36,5 @@ You should get an auth message on the first pass-simply say 'yes'.  If you see t
        your-ip/wp-admin
 
 ## Reference
-An blog post to bring you up to speed on Ansible: [Ansible Quick Start](http://datasciex.com/?p=230)
+A blog post to bring you up to speed on Ansible: [Ansible Quick Start](http://datasciex.com/?p=230)
 

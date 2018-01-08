@@ -1,0 +1,15 @@
+---
+- name: Install php-fpm and deps
+  yum: name={{ item }} state=present
+  with_items:
+    - php70.x86_64
+    - php70-cli.x86_64
+    - php70-common.x86_64
+    - php70-fpm.x86_64
+    - php70-json.x86_64
+    - php70-mbstring.x86_64
+    - php70-mysqlnd.x86_64
+    - php70-pdo.x86_64
+    - php70-process.x86_64
+    - php70-xml.x86_64
+  notify: restart php-fpm

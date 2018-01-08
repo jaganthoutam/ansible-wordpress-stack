@@ -1,0 +1,12 @@
+---
+- name: Install Mysql package
+  yum: name={{ item }} state=present
+  with_items:
+   - mysql-server
+   - MySQL-python
+
+- name: start mysqld service
+  service: name=mysqld state=started enabled=yes
+
+- name: Set root password
+  shell: mysqladmin -u root password {{mysql_root_password}}

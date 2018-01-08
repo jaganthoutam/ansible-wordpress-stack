@@ -1,0 +1,49 @@
+---
+- name: Download WordPress
+  get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/usr/share/nginx/html/wordpress-{{ wp_version }}.tar.gz
+           sha256sum="{{ wp_sha256sum }}"
+
+- name: Extract archive
+  command: chdir=/usr/share/nginx/html/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz 
+
+- name: correct directory structure
+  shell: chdir=/usr/share/nginx/html mv wordpress/* .
+
+- name: Add group "wordpress"
+  group: name=wordpress
+
+- name: Add user "wordpress"
+  user: name=wordpress group=wordpress home=/usr/share/nginx/html/
+
+- name: add apache and nginx to wordpress group
+  user: name={{ item }} groups=wordpress
+  with_items:
+    - apache
+    - nginx
+
+- name: Fetch random salts for WordPress config
+  local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
+  register: "wp_salt"
+  become: no
+  become_method: sudo
+
+- name: Create WordPress database
+  command: mysql -u root -p{{mysql_root_password}} -e "CREATE DATABASE {{wp_db_name}}"  
+
+- name: Create WordPress database user
+  command: mysql -u root -p{{mysql_root_password}} -e 'CREATE USER "{{wp_db_user}}"@"localhost" IDENTIFIED BY "{{wp_db_password}}"'  
+  
+- name: Grant access for user
+  command: mysql -u root -p{{mysql_root_password}} -e 'GRANT ALL ON {{wp_db_name}}.* TO "{{wp_db_user}}"@"localhost"'
+
+- name: Copy WordPress config file
+  template: src=wp-config.php dest=/usr/share/nginx/html
+
+- name: Change ownership of WordPress installation
+  file: path=/usr/share/nginx/html owner=wordpress group=wordpress state=directory recurse=yes setype=httpd_sys_content_t
+
+- name: cleanup for wordpress
+  file: path={{ item }} state=absent
+  with_items:
+    - /usr/share/nginx/html/wordpress
+    - /usr/share/nginx/html/wordpress-{{ wp_version }}.tar.gz

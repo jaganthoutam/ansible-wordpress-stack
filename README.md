@@ -24,7 +24,8 @@ Each of these roles has its own subdirectory structure containing tasks and supp
 4. Update the connect script to point to the private SSH key and the AWS instance. Run the script as a quick test of your connectivity to the AWS instance:
 
         ./connect
-You should get an auth message on the first pass-simply say 'yes'     If you see the AWS Amazon Linux welcome message, you are OK. Use logout to exit.
+You should get an auth message on the first pass-simply say 'yes'.  If you see the AWS Amazon Linux welcome message, you are OK. Use logout to exit.
+
 5. Edit the group_vars/all config file, set a password for the mysql root user (mysql_root_password) and wordpress (wp_db_password).
 6. Run playbook:
 

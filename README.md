@@ -4,7 +4,7 @@ This repo installs wordpress on an Amazon Web Services instance using an ansible
 The playbook is organized into these roles:
 * mysql     - mysql database
 * php-fpm   - php support
-* nginx     - web server
+* openresty - nginx bundled with lua scripting
 * wordpress - wordpress app
 
 Each of these roles has its own subdirectory structure containing tasks and supporting files.

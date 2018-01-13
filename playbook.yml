@@ -1,5 +1,5 @@
 ---
-- name: Install Wordpress Nginx stack
+- name: install wordpress stack with openresty nginx bundle
   hosts: my-vm
   remote_user: ec2-user
   become: yes
@@ -7,6 +7,6 @@
   roles:
     - mysql
     - php-fpm
-    - nginx
+    - openresty
     - wordpress
 

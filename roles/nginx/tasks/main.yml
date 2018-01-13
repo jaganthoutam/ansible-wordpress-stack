@@ -1,9 +1,0 @@
----
-- name: Install Nginx package
-  yum: name=nginx state=present
-- name: copy config file
-  copy: src=nginx.conf dest=/etc/nginx
-  notify: restart nginx
-- name: copy error page
-  copy: src=50x.html dest=/usr/share/nginx/html
-

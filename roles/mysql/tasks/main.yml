@@ -3,8 +3,6 @@
   yum: name={{ item }} state=present
   with_items:
    - mariadb-server
-   - mariadb-client
-   - mariadb-common
 
 - name: start mysqld service
   service: name=mysql state=started enabled=yes

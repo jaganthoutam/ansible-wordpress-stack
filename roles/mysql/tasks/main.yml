@@ -3,9 +3,11 @@
   yum: name={{ item }} state=present
   with_items:
    - mariadb-server
+   - mariadb-client
+   - mariadb-common
 
 - name: start mysqld service
-  service: name=mysqld state=started enabled=yes
+  service: name=mysql state=started enabled=yes
 
 - name: Set root password
   shell: mysqladmin -u root password {{mysql_root_password}}

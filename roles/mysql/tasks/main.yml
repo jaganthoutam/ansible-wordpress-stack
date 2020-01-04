@@ -3,9 +3,11 @@
   yum: name={{ item }} state=present
   with_items:
    - mariadb-server
-
-- name: start mysqld service
-  service: name=mysql state=started enabled=yes
+   
+- name: Install the Python MySQL Support Libraries
+  yum: pkg=MySQL-python state=latest
+- name: start mysql server and enable it on reboot
+  service: name=mariadb state=started enabled=tru
 
 - name: Set root password
   shell: mysqladmin -u root password {{mysql_root_password}}

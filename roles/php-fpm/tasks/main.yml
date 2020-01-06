@@ -1,7 +1,16 @@
 ---
+- name: Install Tools
+  yum:
+   state: present
+   name:
+    - telnet
+    - htop
+    
+    
 - name: Install php-fpm and deps
-  yum: name={{ item }} state=present
-  with_items:
+  yum: 
+   state: present
+   name:
       - php70.x86_64
       - php70-cli.x86_64
       - php70-common.x86_64

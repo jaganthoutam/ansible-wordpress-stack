@@ -1,6 +1,6 @@
 ---
 - name: Install php-fpm and deps
-  yum: name={{ item }} state=present
+  yum: name={{ name }} state=present
   with_items:
     - php70.x86_64
     - php70-cli.x86_64

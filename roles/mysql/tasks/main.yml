@@ -9,5 +9,5 @@
 - name: start mysql server and enable it on reboot
   service: name=mariadb state=started enabled=true
 
-- name: Set root password
-  shell: mysqladmin -u root password {{mysql_root_password}}
+#- name: Set root password
+#  shell: mysqladmin -u root password {{mysql_root_password}}

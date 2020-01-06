@@ -2,15 +2,6 @@
 - name: clean yum 
   command: yum clean all
   
-- name: Add remi-php71
-  yum_repository:
-    name: remi-php71
-    description: Remi's PHP 7.1 RPM repository for Enterprise Linux $releasever - $basearch
-    mirrorlist: http://rpms.remirepo.net/enterprise/$releasever/php71/mirror
-    enabled: yes
-    gpgcheck: 1
-    gpgkey: http://rpms.remirepo.net/RPM-GPG-KEY-remi
- 
 - name: Install Tools
   yum:
    state: present
@@ -23,14 +14,14 @@
   yum: 
    state: present
    name:
-      - php70.x86_64
-      - php70-cli.x86_64
-      - php70-common.x86_64
-      - php70-fpm.x86_64
-      - php70-json.x86_64
-      - php70-mbstring.x86_64
-      - php70-mysqlnd.x86_64
-      - php70-pdo.x86_64
-      - php70-process.x86_64
-      - php70-xml.x86_64
+      - php
+      - php-cli
+      - php-common
+      - php-fpm
+      - php-json
+      - php-mbstring
+      - php-mysqlnd
+      - php-pdo
+      - php-process
+      - php-xml
   notify: restart php-fpm
